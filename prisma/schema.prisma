@@ -1,0 +1,181 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id              Int          @id @default(autoincrement())
+  email           String       @unique @db.VarChar(255)
+  password        String       @db.VarChar(255)
+  username        String       @db.VarChar(255)
+  birthday        DateTime
+  photoUrl        String       @db.VarChar(255)
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @default(now())
+  Session         Session[]
+  Subject         Subject[]
+  Activity        Activity[]
+  WeeklyActivity  WeeklyActivity[]
+  Hobby           Hobby[]
+  Task            Task[]
+  Progress        Progress[]
+  Reward          Reward[]
+  StudySession    StudySession[]
+  Link            Link[]
+}
+
+model Session {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  User      User     @relation(fields: [userId], references: [id])
+  token     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+}
+
+model Subject {
+  id             Int          @id @default(autoincrement())
+  name           String       @db.VarChar(255)
+  userId         Int
+  User           User         @relation(fields: [userId], references: [id])
+  linkUrl        String       @db.VarChar(255)
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @default(now())
+  Task           Task[]
+  WeeklyActivity WeeklyActivity[]
+  StudySession   StudySession[]
+}
+
+model Activity {
+  id             Int          @id @default(autoincrement())
+  name           String       @db.VarChar(255)
+  userId         Int
+  User           User         @relation(fields: [userId], references: [id])
+  daysArray      String        
+  startsAt       DateTime
+  endsAt         DateTime
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @default(now())
+  WeeklyActivity WeeklyActivity[]
+}
+
+model WeeklyActivity {
+  id         Int          @id @default(autoincrement())
+  name       String       @db.VarChar(255)
+  userId     Int
+  User       User         @relation(fields: [userId], references: [id])
+  activityId Int
+  Activity   Activity     @relation(fields: [activityId], references: [id])
+  status     ActionStatus
+  weekNumber Int     
+  subjectId   Int
+  Subject     Subject      @relation(fields: [subjectId], references: [id])  
+  startsAt   DateTime
+  endsAt     DateTime
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @default(now())
+}
+
+enum ActionStatus {
+  UNFINISHED
+  ONGOING
+  DONE
+}
+
+model Hobby {
+  id         Int          @id @default(autoincrement())
+  name       String       @db.VarChar(255)
+  userId     Int
+  User       User         @relation(fields: [userId], references: [id])
+  startsAt   DateTime
+  endsAt     DateTime
+  status     HobbyStatus
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @default(now())
+}
+
+enum HobbyStatus {
+  NEW
+  OLD
+  CURRENT
+}
+
+model Task {
+  id          Int          @id @default(autoincrement())
+  name        String       @db.VarChar(255)
+  userId      Int
+  User        User         @relation(fields: [userId], references: [id])
+  dueDate     DateTime     @db.Date
+  status      ActionStatus
+  weekNumber  Int
+  description String       @db.VarChar(255)
+  type        TaskType
+  subjectId   Int
+  Subject     Subject      @relation(fields: [subjectId], references: [id])
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @default(now())
+}
+
+enum TaskType {
+  READING
+  EXERCISE
+  ASSIGNMENT
+  TEST
+  OTHER
+}
+
+model Progress {
+  id          Int          @id @default(autoincrement())
+  userId      Int
+  User        User         @relation(fields: [userId], references: [id])
+  weekNumber  Int
+  percentage  Int
+  link        String       @db.VarChar(255)
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @default(now())
+}
+
+model Reward {
+  id          Int          @id @default(autoincrement())
+  name        String       @db.VarChar(255)
+  userId      Int
+  User        User         @relation(fields: [userId], references: [id])
+  weekNumber  Int
+  status      ActionStatus
+  startsAt   DateTime
+  endsAt     DateTime
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @default(now())
+}
+
+model StudySession {
+  id          Int          @id @default(autoincrement())
+  name        String       @db.VarChar(255)
+  userId      Int
+  User        User         @relation(fields: [userId], references: [id])
+  weekNumber  Int
+  duration    Int
+  status      ActionStatus
+  link        String       @db.VarChar(255)
+  subjectId   Int
+  Subject     Subject      @relation(fields: [subjectId], references: [id])
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @default(now())
+}
+
+model Link {
+  id          Int          @id @default(autoincrement())
+  name        String       @db.VarChar(255)
+  userId      Int
+  User        User         @relation(fields: [userId], references: [id])
+  linkUrl     String       @db.VarChar(255)
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @default(now())
+}
