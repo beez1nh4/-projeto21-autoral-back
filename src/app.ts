@@ -8,7 +8,7 @@ import { loadEnv, connectDb, disconnectDB, connectCache, disconnectCache } from 
 loadEnv();
 
 import { handleApplicationErrors } from "@/middlewares";
-import { activitiesRouter, authenticationRouter, subjectsRouter, usersRouter, weeklyActivitiesRouter } from "@/routers";
+import { activitiesRouter, authenticationRouter, hobbiesRouter, subjectsRouter, usersRouter, weeklyActivitiesRouter } from "@/routers";
 
 
 const app = express();
@@ -20,6 +20,7 @@ app
   .use("/subjects", subjectsRouter)
   .use("/activities", activitiesRouter)
   .use("/weekly", weeklyActivitiesRouter)
+  .use("/hobby", hobbiesRouter)
   .use("/auth", authenticationRouter)
   .use(handleApplicationErrors);
 

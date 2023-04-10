@@ -73,12 +73,12 @@ export async function deleteWeeklyActivityById(req: AuthenticatedRequest, res: R
     if (!weeklyActivityId) {
       return res.sendStatus(httpStatus.BAD_REQUEST);
     }
-    const activity = await weeklyActivityService.deleteWeeklyActivity(userId, weeklyActivityId);
+    const weeklyActivity = await weeklyActivityService.deleteWeeklyActivity(userId, weeklyActivityId);
 
-    if (!activity) {
+    if (!weeklyActivity) {
       return res.sendStatus(httpStatus.NOT_FOUND);
     }
-    return res.status(httpStatus.OK).send(activity);
+    return res.status(httpStatus.OK).send(weeklyActivity);
   } catch (error) {
     if (error.name === "UnauthorizedError") {
       return res.sendStatus(httpStatus.UNAUTHORIZED);
