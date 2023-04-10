@@ -1,11 +1,10 @@
 import { notFoundError, unauthorizedError } from "@/errors";
-import activityRepository from "@/repositories/activity-repository";
 import weeklyActivityRepository, { WeeklyActivityParams } from "@/repositories/weekly-repository";
 import { ActionStatus } from "@prisma/client";
 
 async function getWeeklyActivitiesByUserId(userId: number) {
 
-  const weeklyActivities = await activityRepository.findActivitiesByUserId(userId);
+  const weeklyActivities = await weeklyActivityRepository.findWeeklyActivitiesByUserId(userId);
 
   if (!weeklyActivities) {
     throw notFoundError();
@@ -54,9 +53,9 @@ async function updateWeeklyActivity(userId: number, weeklyActivityId: number, st
     if (weeklyActivity.userId !== userId){
       throw unauthorizedError();
     }
-    await weeklyActivityRepository.updateWeeklyActivityById(weeklyActivityId, status);
+    const updatedWeeklyActivity = await weeklyActivityRepository.updateWeeklyActivityById(weeklyActivityId, status);
     
-    return weeklyActivityId;
+    return updatedWeeklyActivity;
 }
 
 const weeklyActivityService = {
