@@ -9,6 +9,7 @@ loadEnv();
 
 import { handleApplicationErrors } from "@/middlewares";
 import { authenticationRouter, subjectsRouter, usersRouter } from "@/routers";
+import { activitiesRouter } from "./routers/activities-router.";
 
 const app = express();
 app
@@ -17,6 +18,7 @@ app
   .get("/health", (_req, res) => res.send("OK!"))
   .use("/users", usersRouter)
   .use("/subjects", subjectsRouter)
+  .use("/activities", activitiesRouter)
   .use("/auth", authenticationRouter)
   .use(handleApplicationErrors);
 
