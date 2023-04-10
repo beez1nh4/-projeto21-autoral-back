@@ -3,7 +3,7 @@ import authenticationService from "@/services/authentication-service";
 import { Request, Response } from "express";
 import httpStatus from "http-status";
 
-export async function singInPost(req: Request, res: Response) {
+export async function signInPost(req: Request, res: Response) {
   const { email, password } = req.body as SignInParams;
 
   try {
