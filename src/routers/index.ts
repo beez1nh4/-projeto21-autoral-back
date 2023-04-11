@@ -6,3 +6,4 @@ export * from "./weekly-router";
 export * from "./hobbies-controller";
 export * from "./tasks-router";
 export * from "./rewards-router";
+export * from "./studies-controller";

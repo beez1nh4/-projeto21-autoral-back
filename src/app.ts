@@ -8,7 +8,17 @@ import { loadEnv, connectDb, disconnectDB, connectCache, disconnectCache } from 
 loadEnv();
 
 import { handleApplicationErrors } from "@/middlewares";
-import { activitiesRouter, authenticationRouter, hobbiesRouter, rewardsRouter, subjectsRouter, tasksRouter, usersRouter, weeklyActivitiesRouter } from "@/routers";
+import { 
+  activitiesRouter, 
+  authenticationRouter, 
+  hobbiesRouter, 
+  rewardsRouter, 
+  studiesRouter, 
+  subjectsRouter, 
+  tasksRouter, 
+  usersRouter, 
+  weeklyActivitiesRouter 
+} from "@/routers";
 
 
 const app = express();
@@ -16,13 +26,14 @@ app
   .use(cors())
   .use(express.json())
   .get("/health", (_req, res) => res.send("OK!"))
-  .use("/users", usersRouter)
-  .use("/subjects", subjectsRouter)
-  .use("/activities", activitiesRouter)
+  .use("/user", usersRouter)
+  .use("/subject", subjectsRouter)
+  .use("/activity", activitiesRouter)
   .use("/weekly", weeklyActivitiesRouter)
   .use("/hobby", hobbiesRouter)
   .use("/task", tasksRouter)
   .use("/reward", rewardsRouter)
+  .use("/study", studiesRouter)
   .use("/auth", authenticationRouter)
   .use(handleApplicationErrors);
 
