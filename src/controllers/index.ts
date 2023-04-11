@@ -8,3 +8,4 @@ export * from "./tasks-controller";
 export * from "./rewards-controller";
 export * from "./studies-controller";
 export * from "./links-controller";
+export * from "./progress-controller";

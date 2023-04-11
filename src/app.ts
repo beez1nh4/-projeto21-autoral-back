@@ -13,6 +13,7 @@ import {
   authenticationRouter, 
   hobbiesRouter, 
   linksRouter, 
+  progressRouter, 
   rewardsRouter, 
   studiesRouter, 
   subjectsRouter, 
@@ -36,6 +37,7 @@ app
   .use("/reward", rewardsRouter)
   .use("/study", studiesRouter)
   .use("/link", linksRouter)
+  .use("/progress", progressRouter)
   .use("/auth", authenticationRouter)
   .use(handleApplicationErrors);
 

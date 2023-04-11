@@ -8,3 +8,4 @@ export * from "./tasks-router";
 export * from "./rewards-router";
 export * from "./studies-controller";
 export * from "./links-router";
+export * from "./progress-router";

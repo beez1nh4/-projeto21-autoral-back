@@ -8,3 +8,4 @@ export * from "./task-service";
 export * from "./reward-service";
 export * from "./study-service";
 export * from "./link-service";
+export * from "./progress-service";
