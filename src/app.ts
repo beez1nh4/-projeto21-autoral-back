@@ -12,6 +12,7 @@ import {
   activitiesRouter, 
   authenticationRouter, 
   hobbiesRouter, 
+  linksRouter, 
   rewardsRouter, 
   studiesRouter, 
   subjectsRouter, 
@@ -34,6 +35,7 @@ app
   .use("/task", tasksRouter)
   .use("/reward", rewardsRouter)
   .use("/study", studiesRouter)
+  .use("/link", linksRouter)
   .use("/auth", authenticationRouter)
   .use(handleApplicationErrors);
 

@@ -150,8 +150,9 @@ model Reward {
   User        User         @relation(fields: [userId], references: [id])
   weekNumber  Int
   status      ActionStatus
-  startsAt   DateTime
-  endsAt     DateTime
+  startsAt    DateTime
+  endsAt      DateTime
+  percentage  Int
   createdAt   DateTime     @default(now())
   updatedAt   DateTime     @default(now())
 }

@@ -7,3 +7,4 @@ export * from "./hobby-repository";
 export * from "./task-repository";
 export * from "./reward-repository";
 export * from "./study-repository";
+export * from "./link-repository";
