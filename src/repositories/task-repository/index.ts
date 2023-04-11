@@ -33,7 +33,7 @@ async function deleteTaskById(taskId: number) {
     });
 }
 
-async function updateTaskyById(taskId: number, data: TaskData) {
+async function updateTaskById(taskId: number, data: TaskData) {
     return prisma.task.update({
       where: {
         id: taskId,
@@ -49,7 +49,7 @@ const taskRepository = {
   createTask,
   findTaskById,
   deleteTaskById,
-  updateTaskyById
+  updateTaskById
 };
 
 export default taskRepository;

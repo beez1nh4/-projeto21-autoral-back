@@ -5,3 +5,4 @@ export * from "./activities-controller";
 export * from "./weekly-controller";
 export * from "./hobbies-controller"
 export * from "./tasks-controller";
+export * from "./rewards-controller";

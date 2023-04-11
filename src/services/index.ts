@@ -5,3 +5,4 @@ export * from "./activity-service";
 export * from "./weekly-service";
 export * from "./hobby-service";
 export * from "./task-service";
+export * from "./reward-service";

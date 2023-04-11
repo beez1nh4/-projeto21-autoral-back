@@ -1,18 +1,18 @@
 import { AuthenticatedRequest } from "@/middlewares";
-import taskService from "@/services/task-service";
+import rewardService from "@/services/reward-service";
 import { Response } from "express";
 import httpStatus from "http-status";
 
-export async function getTasksByUserId(req: AuthenticatedRequest, res: Response) {
+export async function getRewardsByUserId(req: AuthenticatedRequest, res: Response) {
   try {
     const { userId } = req;
 
-    const tasks = await taskService.getTasksByUserId(userId);
+    const rewards = await rewardService.getRewardsByUserId(userId);
 
-    if (!tasks) {
+    if (!rewards) {
       return res.sendStatus(httpStatus.NOT_FOUND);
     }
-    return res.status(httpStatus.OK).send(tasks);
+    return res.status(httpStatus.OK).send(rewards);
   } catch (error) {
     if (error.name === "UnauthorizedError") {
       return res.sendStatus(httpStatus.UNAUTHORIZED);
@@ -21,20 +21,20 @@ export async function getTasksByUserId(req: AuthenticatedRequest, res: Response)
   }
 }
 
-export async function getTaskById(req: AuthenticatedRequest, res: Response) {
+export async function getRewardById(req: AuthenticatedRequest, res: Response) {
   try {
-    const taskId = Number(req.query.taskId);
+    const rewardId = Number(req.query.rewardId);
     const { userId } = req;
 
-    if (!taskId) {
+    if (!rewardId) {
       return res.sendStatus(httpStatus.BAD_REQUEST);
     }
-    const task = await taskService.getTaskById(userId, taskId);
+    const reward = await rewardService.getRewardById(userId, rewardId);
 
-    if (!task) {
+    if (!reward) {
       return res.sendStatus(httpStatus.NOT_FOUND);
     }
-    return res.status(httpStatus.OK).send(task);
+    return res.status(httpStatus.OK).send(reward);
   } catch (error) {
     if (error.name === "UnauthorizedError") {
       return res.sendStatus(httpStatus.UNAUTHORIZED);
@@ -43,20 +43,20 @@ export async function getTaskById(req: AuthenticatedRequest, res: Response) {
   }
 }
 
-export async function postTask(req: AuthenticatedRequest, res: Response) {
+export async function postReward(req: AuthenticatedRequest, res: Response) {
   try {
-    const taskData = req.body;
+    const rewardData = req.body;
 
-    if (!taskData) {
+    if (!rewardData) {
       return res.sendStatus(httpStatus.BAD_REQUEST);
     }
-    const task = await taskService.createTask(taskData);
+    const reward = await rewardService.createReward(rewardData);
 
-    if (!task) {
+    if (!reward) {
       return res.sendStatus(httpStatus.NOT_FOUND);
     }
 
-    return res.status(httpStatus.OK).send(task);
+    return res.status(httpStatus.OK).send(reward);
   } catch (error) {
     if (error.name === "UnauthorizedError") {
       return res.sendStatus(httpStatus.UNAUTHORIZED);
@@ -65,20 +65,20 @@ export async function postTask(req: AuthenticatedRequest, res: Response) {
   }
 }
 
-export async function deleteTaskById(req: AuthenticatedRequest, res: Response) {
+export async function deleteRewardById(req: AuthenticatedRequest, res: Response) {
   try {
-    const taskId = Number(req.query.taskId);
+    const rewardId = Number(req.query.rewardId);
     const { userId } = req;
 
-    if (!taskId) {
+    if (!rewardId) {
       return res.sendStatus(httpStatus.BAD_REQUEST);
     }
-    const task = await taskService.deleteTask(userId, taskId);
+    const reward = await rewardService.deleteReward(userId, rewardId);
 
-    if (!task) {
+    if (!reward) {
       return res.sendStatus(httpStatus.NOT_FOUND);
     }
-    return res.status(httpStatus.OK).send(task);
+    return res.status(httpStatus.OK).send(reward);
   } catch (error) {
     if (error.name === "UnauthorizedError") {
         return res.sendStatus(httpStatus.UNAUTHORIZED);
@@ -88,21 +88,21 @@ export async function deleteTaskById(req: AuthenticatedRequest, res: Response) {
   }
 
 
-export async function updateTaskById(req: AuthenticatedRequest, res: Response) {
+export async function updateRewardById(req: AuthenticatedRequest, res: Response) {
     try {
-      const taskId = Number(req.query.taskId);
+      const rewardId = Number(req.query.rewardId);
       const { userId } = req;
       const data = req.body;
   
-      if (!taskId) {
+      if (!rewardId) {
         return res.sendStatus(httpStatus.BAD_REQUEST);
       }
-      const task = await taskService.updateTask(userId, taskId, data);
+      const reward = await rewardService.updateReward(userId, rewardId, data);
   
-      if (!task) {
+      if (!reward) {
         return res.sendStatus(httpStatus.NOT_FOUND);
       }
-      return res.status(httpStatus.OK).send(task);
+      return res.status(httpStatus.OK).send(reward);
     } catch (error) {
       if (error.name === "UnauthorizedError") {
         return res.sendStatus(httpStatus.UNAUTHORIZED);

@@ -52,7 +52,7 @@ async function updateTask(userId: number, taskId: number, data: TaskData) {
     if (task.userId !== userId){
       throw unauthorizedError();
     }
-    const updatedTask = await taskRepository.updateTaskyById(taskId, data);
+    const updatedTask = await taskRepository.updateTaskById(taskId, data);
     
     return updatedTask;
 }
