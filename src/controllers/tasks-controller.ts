@@ -23,7 +23,7 @@ export async function getTasksByUserId(req: AuthenticatedRequest, res: Response)
 
 export async function getTaskById(req: AuthenticatedRequest, res: Response) {
   try {
-    const taskId = Number(req.query.taskId);
+    const taskId = Number(req.params.taskId);
     const { userId } = req;
 
     if (!taskId) {
@@ -67,7 +67,7 @@ export async function postTask(req: AuthenticatedRequest, res: Response) {
 
 export async function deleteTaskById(req: AuthenticatedRequest, res: Response) {
   try {
-    const taskId = Number(req.query.taskId);
+    const taskId = Number(req.params.taskId);
     const { userId } = req;
 
     if (!taskId) {
@@ -90,7 +90,7 @@ export async function deleteTaskById(req: AuthenticatedRequest, res: Response) {
 
 export async function updateTaskById(req: AuthenticatedRequest, res: Response) {
     try {
-      const taskId = Number(req.query.taskId);
+      const taskId = Number(req.params.taskId);
       const { userId } = req;
       const data = req.body;
   

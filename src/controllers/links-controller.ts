@@ -23,7 +23,7 @@ export async function getLinksByUserId(req: AuthenticatedRequest, res: Response)
 
 export async function getLinkById(req: AuthenticatedRequest, res: Response) {
   try {
-    const linkId = Number(req.query.linkId);
+    const linkId = Number(req.params.linkId);
     const { userId } = req;
 
     if (!linkId) {
@@ -67,7 +67,7 @@ export async function postLink(req: AuthenticatedRequest, res: Response) {
 
 export async function deleteLinkById(req: AuthenticatedRequest, res: Response) {
   try {
-    const linkId = Number(req.query.linkId);
+    const linkId = Number(req.params.linkId);
     const { userId } = req;
 
     if (!linkId) {
@@ -90,7 +90,7 @@ export async function deleteLinkById(req: AuthenticatedRequest, res: Response) {
 
 export async function updateLinkById(req: AuthenticatedRequest, res: Response) {
     try {
-      const linkId = Number(req.query.linkId);
+      const linkId = Number(req.params.linkId);
       const { userId } = req;
       const data = req.body;
   

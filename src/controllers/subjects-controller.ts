@@ -23,7 +23,7 @@ export async function getSubjectsByUserId(req: AuthenticatedRequest, res: Respon
 
 export async function getSubjectById(req: AuthenticatedRequest, res: Response) {
   try {
-    const subjectId = Number(req.query.subjectId);
+    const subjectId = Number(req.params.subjectId);
     const { userId } = req;
 
     if (!subjectId) {
@@ -67,7 +67,7 @@ export async function postSubject(req: AuthenticatedRequest, res: Response) {
 
 export async function deleteSubjectById(req: AuthenticatedRequest, res: Response) {
   try {
-    const subjectId = Number(req.query.subjectId);
+    const subjectId = Number(req.params.subjectId);
     const { userId } = req;
 
     if (!subjectId) {

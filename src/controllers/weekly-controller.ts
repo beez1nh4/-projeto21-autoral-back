@@ -23,7 +23,7 @@ export async function getWeeklyActivitiesByUserId(req: AuthenticatedRequest, res
 
 export async function getWeeklyActivityById(req: AuthenticatedRequest, res: Response) {
   try {
-    const weeklyActivityId = Number(req.query.weeklyActivityId);
+    const weeklyActivityId = Number(req.params.weeklyActivityId);
     const { userId } = req;
 
     if (!weeklyActivityId) {
@@ -67,7 +67,7 @@ export async function postWeeklyActivity(req: AuthenticatedRequest, res: Respons
 
 export async function deleteWeeklyActivityById(req: AuthenticatedRequest, res: Response) {
   try {
-    const weeklyActivityId = Number(req.query.weeklyActivityId);
+    const weeklyActivityId = Number(req.params.weeklyActivityId);
     const { userId } = req;
 
     if (!weeklyActivityId) {
@@ -89,7 +89,7 @@ export async function deleteWeeklyActivityById(req: AuthenticatedRequest, res: R
 
 export async function updateWeeklyActivityById(req: AuthenticatedRequest, res: Response) {
     try {
-      const weeklyActivityId = Number(req.query.weeklyActivityId);
+      const weeklyActivityId = Number(req.params.weeklyActivityId);
       const { userId } = req;
       const { status } = req.body;
   

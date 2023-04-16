@@ -45,11 +45,24 @@ async function deleteActivity(userId: number, activityId: number) {
   return activity;
 }
 
+async function updateActivity(userId: number, activityId: number, data: ActivityParams) {
+  
+  const activity = await activityRepository.findActivityById(activityId); 
+
+  if (activity.userId !== userId){
+    throw unauthorizedError();
+  }
+  const updatedActivity = await activityRepository.updateActivityById(activityId, data);
+  
+  return updatedActivity;
+}
+
 const activityService = {
   getActivitiesByUserId,
   getActivityById,
   createActivity,
-  deleteActivity
+  deleteActivity,
+  updateActivity
 };
 
 export default activityService;

@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { authenticateToken } from "@/middlewares";
-import { getActivitiesByUserId, getActivityById, postActivity, deleteActivityById } from "@/controllers";
+import { getActivitiesByUserId, getActivityById, postActivity, deleteActivityById, updateActivityById } from "@/controllers";
 
 const activitiesRouter = Router();
 
@@ -9,6 +9,7 @@ activitiesRouter
   .get("/", getActivitiesByUserId)
   .get("/:activityId", getActivityById)
   .post("/", postActivity)
-  .delete("/:activityId", deleteActivityById);
+  .delete("/:activityId", deleteActivityById)
+  .put("/:activityId", updateActivityById);
 
 export { activitiesRouter };

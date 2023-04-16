@@ -23,7 +23,7 @@ export async function getProgressByUserId(req: AuthenticatedRequest, res: Respon
 
 export async function getProgressById(req: AuthenticatedRequest, res: Response) {
   try {
-    const progressId = Number(req.query.progressId);
+    const progressId = Number(req.params.progressId);
     const { userId } = req;
 
     if (!progressId) {
@@ -67,7 +67,7 @@ export async function postProgress(req: AuthenticatedRequest, res: Response) {
 
 export async function deleteProgressById(req: AuthenticatedRequest, res: Response) {
   try {
-    const progressId = Number(req.query.progressId);
+    const progressId = Number(req.params.progressId);
     const { userId } = req;
 
     if (!progressId) {
@@ -90,7 +90,7 @@ export async function deleteProgressById(req: AuthenticatedRequest, res: Respons
 
 export async function updateProgressById(req: AuthenticatedRequest, res: Response) {
     try {
-      const progressId = Number(req.query.progressId);
+      const progressId = Number(req.params.progressId);
       const { userId } = req;
       const data = req.body;
   

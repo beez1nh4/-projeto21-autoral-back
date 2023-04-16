@@ -23,7 +23,7 @@ export async function getHobbiesByUserId(req: AuthenticatedRequest, res: Respons
 
 export async function getHobbyById(req: AuthenticatedRequest, res: Response) {
   try {
-    const hobbyId = Number(req.query.hobbyId);
+    const hobbyId = Number(req.params.hobbyId);
     const { userId } = req;
 
     if (!hobbyId) {
@@ -67,7 +67,7 @@ export async function postHobby(req: AuthenticatedRequest, res: Response) {
 
 export async function deleteHobbyById(req: AuthenticatedRequest, res: Response) {
   try {
-    const hobbyId = Number(req.query.hobbyId);
+    const hobbyId = Number(req.params.hobbyId);
     const { userId } = req;
 
     if (!hobbyId) {
@@ -90,7 +90,7 @@ export async function deleteHobbyById(req: AuthenticatedRequest, res: Response) 
 
 export async function updateHobbyById(req: AuthenticatedRequest, res: Response) {
     try {
-      const hobbyId = Number(req.query.hobbyId);
+      const hobbyId = Number(req.params.hobbyId);
       const { userId } = req;
       const { status } = req.body;
   

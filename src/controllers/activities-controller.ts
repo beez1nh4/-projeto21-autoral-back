@@ -1,4 +1,5 @@
 import { AuthenticatedRequest } from "@/middlewares";
+import { ActivityParams } from "@/repositories";
 import activityService from "@/services/activity-service";
 import { Response } from "express";
 import httpStatus from "http-status";
@@ -23,7 +24,7 @@ export async function getActivitiesByUserId(req: AuthenticatedRequest, res: Resp
 
 export async function getActivityById(req: AuthenticatedRequest, res: Response) {
   try {
-    const activityId = Number(req.query.activityId);
+    const activityId = Number(req.params.activityId);
     const { userId } = req;
 
     if (!activityId) {
@@ -45,7 +46,7 @@ export async function getActivityById(req: AuthenticatedRequest, res: Response) 
 
 export async function postActivity(req: AuthenticatedRequest, res: Response) {
   try {
-    const activityData = req.body;
+    const activityData = req.body as ActivityParams;
 
     if (!activityData) {
       return res.sendStatus(httpStatus.BAD_REQUEST);
@@ -67,13 +68,36 @@ export async function postActivity(req: AuthenticatedRequest, res: Response) {
 
 export async function deleteActivityById(req: AuthenticatedRequest, res: Response) {
   try {
-    const activityId = Number(req.query.activityId);
+    const activityId = Number(req.params.activityId);
     const { userId } = req;
 
     if (!activityId) {
       return res.sendStatus(httpStatus.BAD_REQUEST);
     }
     const activity = await activityService.deleteActivity(userId, activityId);
+
+    if (!activity) {
+      return res.sendStatus(httpStatus.NOT_FOUND);
+    }
+    return res.status(httpStatus.OK).send(activity);
+  } catch (error) {
+    if (error.name === "UnauthorizedError") {
+      return res.sendStatus(httpStatus.UNAUTHORIZED);
+    }
+    return res.sendStatus(httpStatus.NOT_FOUND);
+  }
+}
+
+export async function updateActivityById(req: AuthenticatedRequest, res: Response) {
+  try {
+    const activityId = Number(req.params.activityId);
+    const { userId } = req;
+    const data = req.body as ActivityParams;
+
+    if (!activityId) {
+      return res.sendStatus(httpStatus.BAD_REQUEST);
+    }
+    const activity = await activityService.updateActivity(userId, activityId, data);
 
     if (!activity) {
       return res.sendStatus(httpStatus.NOT_FOUND);

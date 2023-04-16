@@ -23,7 +23,7 @@ export async function getRewardsByUserId(req: AuthenticatedRequest, res: Respons
 
 export async function getRewardById(req: AuthenticatedRequest, res: Response) {
   try {
-    const rewardId = Number(req.query.rewardId);
+    const rewardId = Number(req.params.rewardId);
     const { userId } = req;
 
     if (!rewardId) {
@@ -67,7 +67,7 @@ export async function postReward(req: AuthenticatedRequest, res: Response) {
 
 export async function deleteRewardById(req: AuthenticatedRequest, res: Response) {
   try {
-    const rewardId = Number(req.query.rewardId);
+    const rewardId = Number(req.params.rewardId);
     const { userId } = req;
 
     if (!rewardId) {
@@ -90,7 +90,7 @@ export async function deleteRewardById(req: AuthenticatedRequest, res: Response)
 
 export async function updateRewardById(req: AuthenticatedRequest, res: Response) {
     try {
-      const rewardId = Number(req.query.rewardId);
+      const rewardId = Number(req.params.rewardId);
       const { userId } = req;
       const data = req.body;
   

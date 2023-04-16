@@ -33,13 +33,23 @@ async function deleteActivityById(activityId: number) {
     });
 }
 
+async function updateActivityById(activityId: number, data: ActivityParams) {
+  return prisma.activity.update({
+    where: {
+      id: activityId,
+    },
+    data
+  });
+}
+
 export type ActivityParams = Omit<Activity, "id" | "createdAt" | "updatedAt">
 
 const activityRepository = {
   findActivitiesByUserId,
   createActivity,
   findActivityById,
-  deleteActivityById
+  deleteActivityById,
+  updateActivityById
 };
 
 export default activityRepository;

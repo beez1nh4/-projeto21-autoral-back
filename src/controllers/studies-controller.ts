@@ -23,7 +23,7 @@ export async function getStudySessionsByUserId(req: AuthenticatedRequest, res: R
 
 export async function getStudySessionById(req: AuthenticatedRequest, res: Response) {
   try {
-    const studySessionId = Number(req.query.studySessionId);
+    const studySessionId = Number(req.params.studySessionId);
     const { userId } = req;
 
     if (!studySessionId) {
@@ -67,7 +67,7 @@ export async function postStudySession(req: AuthenticatedRequest, res: Response)
 
 export async function deleteStudySessionById(req: AuthenticatedRequest, res: Response) {
   try {
-    const studySessionId = Number(req.query.studySessionId);
+    const studySessionId = Number(req.params.studySessionId);
     const { userId } = req;
 
     if (!studySessionId) {
@@ -90,7 +90,7 @@ export async function deleteStudySessionById(req: AuthenticatedRequest, res: Res
 
 export async function updateStudySessionById(req: AuthenticatedRequest, res: Response) {
     try {
-      const studySessionId = Number(req.query.studySessionId);
+      const studySessionId = Number(req.params.studySessionId);
       const { userId } = req;
       const data = req.body;
   
