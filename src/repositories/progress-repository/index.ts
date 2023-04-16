@@ -45,12 +45,12 @@ async function updateProgressById(progressId: number, data: ProgressParams) {
 export type ProgressParams = Omit<Progress, "id" | "createdAt" | "updatedAt">
 
 
-const linkRepository = {
-  findLinksByUserId,
-  createLink,
-  findLinkById,
-  deleteLinkById,
-  updateLinkById
+const progressRepository = {
+  findProgressByUserId,
+  createProgress,
+  findProgressById,
+  deleteProgressById,
+  updateProgressById
 };
 
-export default linkRepository;
+export default progressRepository;

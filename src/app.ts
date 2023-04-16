@@ -28,7 +28,7 @@ app
   .use(cors())
   .use(express.json())
   .get("/health", (_req, res) => res.send("OK!"))
-  .use("/user", usersRouter)
+  .use("/users", usersRouter)
   .use("/subject", subjectsRouter)
   .use("/activity", activitiesRouter)
   .use("/weekly", weeklyActivitiesRouter)
