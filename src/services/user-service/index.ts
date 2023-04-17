@@ -1,7 +1,7 @@
 import userRepository from "@/repositories/user-repository";
 import { User } from "@prisma/client";
 import bcrypt from "bcrypt";
-import { duplicatedEmailError } from "@/errors";
+import { duplicatedEmailError, notFoundError, unauthorizedError } from "@/errors";
 
 export async function createUser({ email, password, username, birthday, photoUrl }: CreateUserParams): Promise<User> {
 
@@ -24,11 +24,21 @@ async function validateUniqueEmail(email: string) {
   }
 }
 
+async function getUserById(userId: number) {
 
+  const user = await userRepository.findUserById(userId);
+
+  if (!user) {
+    throw notFoundError();
+  }
+
+  return user;
+}
 export type CreateUserParams = Omit<User, "id" | "createdAt" | "updatedAt">;
 
 const userService = {
   createUser,
+  getUserById
 };
 
 export default userService;

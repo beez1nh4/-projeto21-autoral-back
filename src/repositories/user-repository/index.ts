@@ -9,6 +9,14 @@ async function findUserByEmail(email: string) {
   });
 }
 
+async function findUserById(id: number) {
+  return prisma.user.findFirst({
+    where: {
+      id,
+    }
+  });
+}
+
 async function createUser(data: Prisma.UserUncheckedCreateInput) {
   return prisma.user.create({
     data,
@@ -29,6 +37,7 @@ export type UpdateUserParams = Omit<User, "id" | "createdAt" | "updatedAt">;
 
 const userRepository = {
   findUserByEmail,
+  findUserById,
   createUser,
   updateUser
 };
