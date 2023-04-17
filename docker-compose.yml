@@ -1,0 +1,49 @@
+
+networks:
+  fullstack-network:
+    name: fullstack-network
+    external: true
+
+services:
+  postgres:
+    image: postgres
+    container_name: postgres
+    ports:
+      - 5433:5432
+    env_file:
+      - back-end/.env
+
+  node:
+    container_name: node
+    build: .
+    ports:
+      - 5000:5000
+    depends_on:
+      - postgres
+    env_file:
+      - back-end/.env
+
+```yaml
+services:
+  postgres:
+    image: postgres
+    container_name: postgres
+    ports:
+      - 5433:5432
+    env_file:
+      - back-end/.env
+    volumes:
+      - postgres-volume:/var/lib/postgresql/data
+
+  node:
+    container_name: node
+    build: ./back-end
+    ports:
+      - 5000:5000
+    depends_on:
+      - postgres
+    env_file:
+      - back-end/.env
+
+volumes:
+  postgres-volume:
