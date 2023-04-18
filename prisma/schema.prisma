@@ -94,8 +94,6 @@ model Hobby {
   name       String       @db.VarChar(255)
   userId     Int
   User       User         @relation(fields: [userId], references: [id])
-  startsAt   DateTime
-  endsAt     DateTime
   status     HobbyStatus
   createdAt  DateTime     @default(now())
   updatedAt  DateTime     @default(now())

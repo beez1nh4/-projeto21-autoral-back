@@ -33,13 +33,23 @@ async function deleteSubjectById(subjectId: number) {
     });
 }
 
+async function updateSubjectById(subjectId: number, data: SubjectParams) {
+  return prisma.subject.update({
+    where: {
+      id: subjectId,
+    },
+    data
+  });
+}
+
 export type SubjectParams = Omit<Subject, "id" | "createdAt" | "updatedAt">
 
 const subjectRepository = {
   findSubjectsByUserId,
   createSubject,
   findSubjectById,
-  deleteSubjectById
+  deleteSubjectById,
+  updateSubjectById
 };
 
 export default subjectRepository;

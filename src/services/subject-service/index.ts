@@ -45,11 +45,24 @@ async function deleteSubject(userId: number, subjectId: number) {
   return subject;
 }
 
+async function updateSubject(userId: number, subjectId: number, data: SubjectParams) {
+  
+  const subject = await subjectRepository.findSubjectById(subjectId); 
+
+  if (subject.userId !== userId){
+    throw unauthorizedError();
+  }
+  const updatedSubject = await subjectRepository.updateSubjectById(subjectId, data);
+  
+  return updatedSubject;
+}
+
 const subjectService = {
   getSubjectsByUserId,
   getSubjectById,
   createSubject,
-  deleteSubject
+  deleteSubject,
+  updateSubject
 };
 
 export default subjectService;

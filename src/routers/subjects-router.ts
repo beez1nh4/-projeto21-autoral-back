@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { authenticateToken } from "@/middlewares";
-import { getSubjectsByUserId, getSubjectById, postSubject, deleteSubjectById } from "@/controllers";
+import { getSubjectsByUserId, getSubjectById, postSubject, deleteSubjectById, updateSubjectById } from "@/controllers";
 
 const subjectsRouter = Router();
 
@@ -9,6 +9,7 @@ subjectsRouter
   .get("/", getSubjectsByUserId)
   .get("/:subjectId", getSubjectById)
   .post("/", postSubject)
-  .delete("/:subjectId", deleteSubjectById);
+  .delete("/:subjectId", deleteSubjectById)
+  .put("/:subjectId", updateSubjectById);
 
 export { subjectsRouter };
